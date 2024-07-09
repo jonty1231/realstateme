@@ -12,7 +12,29 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      brightness: {
+        '500': '5',
+        '600': '6',
+      },
     },
   },
-  plugins: [],
+
+  variants: {
+    extend: {
+      brightness: ['hover', 'focus'],
+    },
+  },
+
+
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.border-b-custom': {
+          borderBottomWidth: '30px',
+          borderBottomColor: 'rgba(226, 62, 29, 0.8)',
+        },
+      }
+      addUtilities(newUtilities, ['responsive', 'hover'])
+    },
+  ],
 };
