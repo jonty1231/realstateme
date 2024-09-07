@@ -1,17 +1,19 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import {storageLink} from  '../constants'
+
 export default function Blogcard({img,date,month,title,area}) {
   return (
     <>
-   <div className='w-full sm:w-[400px] h-auto bg-white my-4 px-2 overflow-hidden'>
+   <div className='w-full sm:w-[450px] h-auto bg-white my-4 px-2 overflow-hidden'>
   {/* w-full h-[220px] transition-transform duration-500 ease-in-out transform hover:scale-110 */}
   <div className='bg-img overflow-hidden rounded-lg'>
     <Image 
      width={100}
      height={100}
       className='rounded-md transition-transform duration-500 ease-in-out transform hover:scale-110 w-full h-auto' 
-      src={img} 
+      src={`${storageLink}/${img}`} 
       alt="Image description" // always good to add alt attribute for accessibility
     />
   </div>

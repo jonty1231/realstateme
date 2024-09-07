@@ -267,9 +267,9 @@ const Cards = ({ img, head, add, bed, bath, space, price, cate, flag }) => {
   </>)
 }
 
-export default function Page() {
+export default function Page({params: {slug}}) {
 
-  const [swiper, setSwiper] = useState(null);
+const [swiper, setSwiper] = useState(null);
 
 const goNext = () => {
  
@@ -364,7 +364,7 @@ const goPrev = () => {
   const propertyData = [
     {
       id: "RT48",
-      price: "₹ 252,000",
+      price: "₹ 1,90,000",
       propertySize: "1500 Sq Ft",
       bathrooms: 3,
       bedrooms: 2,
@@ -410,27 +410,7 @@ const goPrev = () => {
     autoplaySpeed: 3000,
   };
 
-  //   Barbeque
-
-  // Dryer
-
-  // Gym
-
-  // Lawn
-
-  // Microwave
-
-  // Outdoor Shower
-
-  // Refrigerator
-
-  // Swimming Pool
-
-  // TV Cable
-
-  // Washer
-
-  // WiFi6
+ 
 
   const address = "1600 Amphitheatre Parkway, Mountain View, CA";
   const Features = [
@@ -557,7 +537,7 @@ const goPrev = () => {
           <div className="content-div relative z-20 mt-2 lg:mt-[-150px] flex flex-wrap justify-between items-start">
             <div className="left-content w-full  lg:w-1/2 mb-4 lg:mb-0">
               <div>
-                <h2 className="text-2xl sm:text-3xl text-black lg:text-white mb-2 font-semibold">Luxury villa in Rego Park</h2>
+              <h2 className="text-2xl sm:text-3xl text-black lg:text-white mb-2 font-semibold"> Equestrian Family Home </h2>
                 <p className="font-[400] text-base text-black sm:text-lg lg:text-white">Los Angeles City, CA, USA</p>
               </div>
               <div className="flex mt-4 text-black  lg:text-white text-base sm:text-lg">
@@ -577,8 +557,8 @@ const goPrev = () => {
                 ))}
               </div>
               <div className="flex flex-col px-4 items-start lg:items-end  lg:mt-0 lg:ml-4">
-                <span className="price text-black  lg:text-white font-semibold text-2xl sm:text-3xl my-2">₹ 82,000</span>
-                <p className="text-black  lg:text-white text-base sm:text-lg">₹ 63.08/sq ft</p>
+                <span className="price text-black  lg:text-white font-semibold text-2xl sm:text-3xl my-2"> ₹ 1,90,000</span>
+                <p className="text-black  lg:text-white text-base sm:text-lg"> ₹ 5000/sq ft</p>
               </div>
             </div>
           </div>
@@ -686,7 +666,7 @@ const goPrev = () => {
               </div>
             </div>
 
-            <div className="flex-none w-full lg:w-1/3 h-auto p-4 right-container sticky top-0">
+            <div className="flex-none w-full lg:w-1/3  p-4 right-container h-[100%] sticky top-[85px]">
               <div className="bg-white shadow-lg p-6 rounded-xl mb-[30px]">
                 <ContactForm />
               </div>
@@ -780,3 +760,5 @@ const goPrev = () => {
     </>
   );
 }
+
+

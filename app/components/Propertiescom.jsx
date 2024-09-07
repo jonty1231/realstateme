@@ -1,130 +1,259 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 
-import { MdOutlineElectricBolt } from "react-icons/md";
+// import { MdOutlineElectricBolt } from "react-icons/md";
 
-import { FaHeart, FaShareAlt } from 'react-icons/fa';
+// import { FaHeart, FaShareAlt } from 'react-icons/fa';
 
 import { MdOutlineBed } from "react-icons/md";
 import { TbBath } from "react-icons/tb";
 import { IoIosExpand } from "react-icons/io";
 import Link from 'next/link'
+import {useDispatch,useSelector} from "react-redux"
 
-const cardData  = [
-  {
-      id: 0,
-      img: '/images/g1-2.webp',
-      head: 'Equestrian Family Home',
-      add: 'San Diego City, CA, USA',
-      bed: 2,
-      bath: 2,
-      space: 1000,
-      price: 100000,
-      cate: 'Villa',
-      flag:"Trending"
-  },
-  {
-      id: 1,
-      img: '/images/g1-3.webp',
-      head: 'Modern Apartment',
-      add: 'New York, NY, USA',
-      bed: 3,
-      bath: 2,
-      space: 1200,
-      price: 150000,
-      cate: 'House',
+
+import { getProperty } from './store/slices/propertySlice';
+import { storageLink } from '../constants';
+
+
+// const cardData  = [
+//   {
+//       id: 0,
+//       img: '/images/g1-2.webp',
+//       head: 'Equestrian Family Home',
+//       add: 'San Diego City, CA, USA',
+//       bed: 2,
+//       bath: 2,
+//       space: 1000,
+//       price: 100000,
+//       cate: 'Villa',
+//       flag:"Trending"
+//   },
+//   {
+//       id: 1,
+//       img: '/images/g1-3.webp',
+//       head: 'Modern Apartment',
+//       add: 'New York, NY, USA',
+//       bed: 3,
+//       bath: 2,
+//       space: 1200,
+//       price: 150000,
+//       cate: 'House',
     
-  },
-  {
-      id: 2,
-      img: '/images/g1-4.webp',
-      head: 'Cozy Cottage',
-      add: 'Austin, TX, USA',
-      bed: 1,
-      bath: 1,
-      space: 800,
-      price: 85000,
-      cate: 'Villa',
+//   },
+//   {
+//       id: 2,
+//       img: '/images/g1-4.webp',
+//       head: 'Cozy Cottage',
+//       add: 'Austin, TX, USA',
+//       bed: 1,
+//       bath: 1,
+//       space: 800,
+//       price: 85000,
+//       cate: 'Villa',
      
-      flag:"New"
-  },
-  {
-      id: 3,
-      img: '/images/g1-2.webp',
-      head: 'Luxury Villa',
-      add: 'Miami, FL, USA',
-      bed: 5,
-      bath: 4,
-      space: 2500,
-      price: 500000,
-      cate: 'House',
-      flag:"Trending"
+//       flag:"New"
+//   },
+//   {
+//       id: 3,
+//       img: '/images/g1-2.webp',
+//       head: 'Luxury Villa',
+//       add: 'Miami, FL, USA',
+//       bed: 5,
+//       bath: 4,
+//       space: 2500,
+//       price: 500000,
+//       cate: 'House',
+//       flag:"Trending"
    
-  },
-  {
+//   },
+//   {
 
-      id: 4,
-      img: '/images/g1-3.webp',
-      head: 'Beachside Bungalow',
-      add: 'Malibu, CA, USA',
-      bed: 3,
-      bath: 2,
-      space: 1500,
-      price: 300000,
-      cate: 'Apartment',
-      flag:"New"
-  },
-  {
-      id: 5,
-      img: '/images/g1-4.webp',
-      head: 'Urban Loft',
-      add: 'Chicago, IL, USA',
-      bed: 2,
-      bath: 1,
-      space: 1100,
-      price: 175000,
-      cate: 'House',
-      flag:"New"
-  },
-  {
-      id: 2,
-      img: '/images/g1-4.webp',
-      head: 'Cozy Cottage',
-      add: 'Austin, TX, USA',
-      bed: 1,
-      bath: 1,
-      space: 800,
-      price: 85000,
-      cate: 'Villa',
+//       id: 4,
+//       img: '/images/g1-3.webp',
+//       head: 'Beachside Bungalow',
+//       add: 'Malibu, CA, USA',
+//       bed: 3,
+//       bath: 2,
+//       space: 1500,
+//       price: 300000,
+//       cate: 'Apartment',
+//       flag:"New"
+//   },
+//   {
+//       id: 5,
+//       img: '/images/g1-4.webp',
+//       head: 'Urban Loft',
+//       add: 'Chicago, IL, USA',
+//       bed: 2,
+//       bath: 1,
+//       space: 1100,
+//       price: 175000,
+//       cate: 'House',
+//       flag:"New"
+//   },
+//   {
+//       id: 2,
+//       img: '/images/g1-4.webp',
+//       head: 'Cozy Cottage',
+//       add: 'Austin, TX, USA',
+//       bed: 1,
+//       bath: 1,
+//       space: 800,
+//       price: 85000,
+//       cate: 'Villa',
 
      
-  },
-  {
-      id: 3,
-      img: '/images/g1-2.webp',
-      head: 'Luxury Villa',
-      add: 'Miami, FL, USA',
-      bed: 5,
-      bath: 4,
-      space: 2500,
-      price: 500000,
-      cate: 'House',
+//   },
+//   {
+//       id: 3,
+//       img: '/images/g1-2.webp',
+//       head: 'Luxury Villa',
+//       add: 'Miami, FL, USA',
+//       bed: 5,
+//       bath: 4,
+//       space: 2500,
+//       price: 500000,
+//       cate: 'House',
       
-  },
+//   },
  
  
-];
+// ];
 
-const Cards = ({img,head,add,bed, bath,space,price,cate,flag })=>{
+
+
+
+// import {apiLink,storageLink} from '../constants/index'
+
+
+
+
+
+
+export default function Slidercom() { 
+
+
+
+
+const [activeCategory, setActiveCategory] = useState(0); 
+const state=useSelector((state)=>state.propertySlice)
+const [newData, setNewData] = useState("");     
+const dispatch=useDispatch()
+useEffect(()=>{
+  dispatch(getProperty())
+
+},[])
+
+
+const data= state.data && state.data
+useEffect(()=>{
+  if(!activeCategory){
+    setNewData(data)
+
+  }
+  else{
+    const filteredData = data.filter(item => item.type == activeCategory);
+      setNewData(filteredData)
+  }
+},[data,activeCategory])
+
+
+
+  return (
+    <>
+      <div className="w-full px-[1rem] lg:px-[5rem] py-10">
+        <div className="content flex justify-between items-center ">
+   
+  
+          <div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl my-2 sm:my-4 lg:my-6 text-[#181a20] font-semibold">
+  Discover Popular Properties
+</h2>
+<p className="text-base sm:text-lg lg:text-xl">
+  Aliquam lacinia diam quis lacus euismod
+</p>
+
+
+          </div>
+
+          <div className='hidden lg:block'>
+          {['All', 'Rent', 'Pg', 'Buy', 'Commercial'].map((value, index) => (
+        <button
+          key={index}
+          className={`px-4 py-[7px] mr-[10px] text-[18px] font-semibold text-black border-2 rounded-[6px] border-black ${activeCategory == index ? 'bg-black text-white' : ''}`}
+          onClick={() => setActiveCategory(index)}
+        >
+          {value}
+        </button>
+      ))}
+
+          </div>
+         
+
+
+        </div>
+
+        <div className="cards-container w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4  lg:gap-4   mt-4 lg:mt-8 relative">
+
+
+
+        
+
+        { newData &&
+          newData?.map((item,index) => (
+
+           
+            <Cards key={index}
+                  img={item.images_paths[0]}
+                  head={item.name}
+                  add={item.address}
+                  bed={item.bedroom}
+                  bath={item.bathroom}
+                  slug={item.slug}
+                  space={item.rate_per_square_feet}
+                  price={item.price}
+                  cate={item.type}
+                  flag={item.type}
+                  />
+              
+          ))
+        }
+          
+
+
+
+
+
+
+
+
+
+
+          
+
+
+
+        </div>
+
+      </div>
+    </>
+  )
+}
+
+
+
+const Cards = ({img,head,add,bed, slug,bath,space,price,cate,flag })=>{
+
   return(<>
 <div className='relative sm:max-w-[360px] lg:max-w-[400px] overflow-hidden cursor-pointer  bg-white rounded-lg shadow-lg m-2'>
-       <Link href={`/singleproperties/${head.trim().replace(/\s+/g, '-')}`} >
+       <Link href={`/${slug}`} >
      
      <div className='img-box overflow-hidden relative'>
        <Image
          className='w-full h-[220px] transition-transform duration-500 ease-in-out transform hover:scale-110'
-         src={img}
+         src={`${storageLink}/${img}`}
          width={200}
          height={200}
        />
@@ -193,98 +322,4 @@ const Cards = ({img,head,add,bed, bath,space,price,cate,flag })=>{
    
      
   </>)
-}
-
-export default function Slidercom() {
-
-  const [activeCategory, setActiveCategory] = useState('All');
-
-const [isActive,setisActive] = useState(true)
-const filterCards = (category) => {
-  if (category === 'All') {
-    return cardData; // Show all cards
-  } else {
-    return cardData.filter(item => item.cate === category);
-  }
-};
-
-// Filtered cards based on active category
-const filteredCards = filterCards(activeCategory);
-
-  return (
-    <>
-      <div className="w-full px-[1rem] lg:px-[5rem] py-10">
-        <div className="content flex justify-between items-center ">
-   
-  
-          <div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl my-2 sm:my-4 lg:my-6 text-[#181a20] font-semibold">
-  Discover Popular Properties
-</h2>
-<p className="text-base sm:text-lg lg:text-xl">
-  Aliquam lacinia diam quis lacus euismod
-</p>
-
-
-          </div>
-
-          <div className='hidden lg:block'>
-          {['All', 'House', 'Villa', 'Office', 'Apartment'].map((value, index) => (
-        <button
-          key={index}
-          className={`px-4 py-[7px] mr-[10px] text-[18px] font-semibold text-black border-2 rounded-[6px] border-black ${activeCategory === value ? 'bg-black text-white' : ''}`}
-          onClick={() => setActiveCategory(value)}
-        >
-          {value}
-        </button>
-      ))}
-
-          </div>
-         
-
-
-        </div>
-
-        <div className="cards-container w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4  lg:gap-4   mt-4 lg:mt-8 relative">
-
-
-
-        
-
-        {
-          filteredCards.map((item,index) => (
-            <Cards
-                  img={item.img}
-                  head={item.head}
-                  add={item.add}
-                  bed={item.bed}
-                  bath={item.bath}
-                  space={item.space}
-                  price={item.price}
-                  cate={item.cate}
-                  flag={item.flag}
-                  />
-              
-          ))
-        }
-          
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
-        </div>
-
-      </div>
-    </>
-  )
 }

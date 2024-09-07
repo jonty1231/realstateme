@@ -10,13 +10,13 @@ export const navLink = [
     {
       id: 1,
       label: 'Listing',
-      href: '/properties',
+      href: '/projects',
       Key: 'listing'
     },
     {
       id: 2,
       label: 'Property',
-      href: '/singleproperties',
+      href: '/properties',
       Key: 'property'
     },
     {
@@ -26,3 +26,7 @@ export const navLink = [
       Key: 'blog'
     }
   ];
+  export const apiLink = 'https://prakarsh123.in/api/v1'
+  export const storageLink = 'https://prakarsh123.in/storage'
+
+  // /storage/$

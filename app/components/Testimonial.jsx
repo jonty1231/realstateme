@@ -1,7 +1,7 @@
 'use client'
 
-import React from 'react';
-import { RiDoubleQuotesR, RiDoubleQuotesL } from "react-icons/ri";
+import React,{useState,useEffect} from 'react';
+import {  RiDoubleQuotesL } from "react-icons/ri";
 import { FaStar } from "react-icons/fa6";
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,43 +9,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
+import {  storageLink } from '../constants';
 
-const testimonials = [
-    {
-        title: "Great Work",
-        quote: "Amazing design, easy to customize and a design quality superlative account on its cloud platform for .",
-        rating: 5,
-        name: "Leslie Alexander",
-        company: "Nintendo",
-        image: "/images/test-1.webp"
-    },
-    {
-        title: "Excellent Service",
-        quote: "The team provided excellent support and helped us achieve our goals with great efficiency.",
-        rating: 5,
-        name: "John Doe",
-        company: "Sony",
-        image: "/images/test-2.webp"
-    },
-    {
-        title: "Highly Recommend",
-        quote: "Their service was exceptional and the product quality exceeded our expectations.",
-        rating: 5,
-        name: "Anna Smith",
-        company: "Microsoft",
-        image: "/images/test-3.webp"
-    },
-    {
-        title: "Fantastic Experience",
-        quote: "Working with this team was a fantastic experience. Highly professional and responsive.",
-        rating: 5,
-        name: "David Brown",
-        company: "Apple",
-        image: "/images/test-4.webp"
-    },
-];
+import {useSelector,useDispatch} from "react-redux"
+import { gettestimonial } from './store/slices/testimonialSlice';
+
 
 const Cards = ({ comment, title, star, img, name, subhead }) => {
+    const numericRating = parseFloat(star);
     return (
         <div className='bg-white w-[400px] mx-2 relative rounded-lg shadow-xl p-4'>
             <div className='flex flex-col'>
@@ -59,13 +30,13 @@ const Cards = ({ comment, title, star, img, name, subhead }) => {
                     {comment}
                 </p>
                 <div className='flex text-yellow-400 text-lg py-4 border-b border-[#ddd]'>
-                    {[...Array(star)].map((_, i) => (
+                    {[...Array(Math.round(numericRating))].map((_, i) => (
                         <FaStar key={i} />
                     ))}
                 </div>
             </div>
             <div className='w-full my-4 flex'>
-                <Image src={img} width={48} height={48} className="w-12 h-12 rounded-full" alt={name} />
+                <Image src={`${storageLink}/${img}`} width={48} height={48} className="w-12 h-12 rounded-full"/>
                 <div className='ml-4'>
                     <h2 className='font-semibold text-lg'>
                         {name}
@@ -80,6 +51,14 @@ const Cards = ({ comment, title, star, img, name, subhead }) => {
 }
 
 export default function Testimonial() {
+const dispatch=useDispatch()
+   const state=useSelector((state)=>state.testimonial)
+    const [testimonialData, settestimonialData] = useState()
+
+  
+useEffect(()=>{dispatch(gettestimonial())},[])
+useEffect(()=>{settestimonialData(state.data)},[state])
+    
     return (
         <div className="w-full px-[1rem] lg:px-[5rem] py-10 ">
             <div className="content">
@@ -113,14 +92,16 @@ export default function Testimonial() {
                     }}
                     className="swiper-container"
                 >
-                    {testimonials.map((data, index) => (
+                    {testimonialData?.map((data, index) => (
+
                         <SwiperSlide key={index}>
+                        {console.log(data)}
                             <Cards
                                 img={data.image}
                                 title={data.title}
                                 name={data.name}
-                                comment={data.quote}
-                                subhead={data.company}
+                                comment={data.description}
+                                subhead={data.lastname}
                                 star={data.rating}
                             />
                         </SwiperSlide>

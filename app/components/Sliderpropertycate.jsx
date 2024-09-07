@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -9,36 +9,11 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import './custom-swiper.css'; // Import custom CSS for Swiper
 import Link from 'next/link'
-const cardData = [
-    {
-      id: 0,
-      title: 'Villa',
-      imgsrc: '/images/g1-4.webp',
-      subhead: '29 Property ',
-      price: '$100'
-    },
-    {
-      id: 1,
-      title: 'House ',
-      imgsrc: '/images/g1-2.webp',
-      subhead: '26 Property ',
-      price: '$200'
-    },
-    {
-      id: 2,
-      title: 'Apartemnt',
-      imgsrc: '/images/g1-4.webp',
-      subhead: '22 Property ',
-      price: '$100'
-    },
-    {
-      id: 3,
-      title: 'Flats',
-      imgsrc: '/images/g1-3.webp',
-      subhead: '15 Property ',
-      price: '$400'
-    },
-];
+
+import {useSelector,useDispatch} from "react-redux"
+import { storageLink } from '../constants';
+import { getcategory } from './store/slices/categorySlice';
+
 
 const Cards = ({ imgsrc, title, subhead }) => {
   return (
@@ -48,7 +23,7 @@ const Cards = ({ imgsrc, title, subhead }) => {
      <Link href={`/properties/${title}`} className="coursor-pointer">
    
       <div className="img-box">
-        <Image src={imgsrc} className="w-full h-full" width={217} height={220} />
+        <Image src={`${storageLink}/${imgsrc}`} className="w-[350px]  h-[250px] object-cover	" width={217} height={220} />
       </div>
       <div className="p-[20px]">
         <h5 className="pb-0 text-xl font-semibold">{title}</h5>
@@ -60,6 +35,14 @@ const Cards = ({ imgsrc, title, subhead }) => {
 };
 
 export default function Sliderpropertycate() {
+  const dispatch=useDispatch()
+  const state=useSelector(state=>state.category)
+const [newData,setNewdata] = useState()
+useEffect(()=>{dispatch(getcategory())},[])
+ useEffect(()=>{setNewdata(state.data)},[state])
+
+  
+
   return (
     <div className="w-full px-[1rem] lg:px-[5rem] py-10">
       <div className="content">
@@ -94,10 +77,10 @@ export default function Sliderpropertycate() {
           }}
           className="swiper-container"
         >
-          {cardData.map((card) => (
+          {newData?.map((card) => (
             <SwiperSlide key={card.id}>
               <Cards
-                imgsrc={card.imgsrc}
+                imgsrc={card.image}
                 title={card.title}
                 subhead={card.subhead}
                 price={card.price}

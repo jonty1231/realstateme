@@ -11,7 +11,7 @@ import Builderslider from "./components/Builderslider";
 export default function Home() {
   return (
    <>
-  <Hero/>
+  <Hero/> 
   <Slidercom/>
   <Bglessslider/>
   <Aboutsection/>

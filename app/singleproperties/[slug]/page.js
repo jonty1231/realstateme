@@ -21,18 +21,20 @@ import SwiperCore, { Navigation, Pagination } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FaArrowLeft } from "react-icons/fa6";
 import { FaArrowRight } from "react-icons/fa6";
-
+import { useParams } from 'next/navigation'
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { IoIosExpand } from "react-icons/io";
-
+import axios from 'axios'
 
 
 SwiperCore.use([Navigation, Pagination]);
+
 import { Carousel } from 'react-responsive-carousel';
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { apiLink, storageLink } from '@/app/constants';
 
 
 
@@ -269,7 +271,9 @@ const Cards = ({ img, head, add, bed, bath, space, price, cate, flag }) => {
 
 export default function Page({params: {slug}}) {
 
-  const [swiper, setSwiper] = useState(null);
+    
+
+const [swiper, setSwiper] = useState(null);
 
 const goNext = () => {
  
@@ -410,27 +414,10 @@ const goPrev = () => {
     autoplaySpeed: 3000,
   };
 
-  //   Barbeque
 
-  // Dryer
 
-  // Gym
 
-  // Lawn
-
-  // Microwave
-
-  // Outdoor Shower
-
-  // Refrigerator
-
-  // Swimming Pool
-
-  // TV Cable
-
-  // Washer
-
-  // WiFi6
+ 
 
   const address = "1600 Amphitheatre Parkway, Mountain View, CA";
   const Features = [
@@ -512,6 +499,19 @@ const goPrev = () => {
     new FsLightbox();
   }, [])
 
+  const params = useParams()
+  const [data,setData] = useState()
+  
+  useEffect(()=>{
+    
+    const fetchData = async () => {
+     const res = await axios.get(`${apiLink}/property/${params.slug}`);
+     
+     setData(res.data)
+    }
+    fetchData();
+  },[])
+
   return (
     <>
       <div className="w-full bg-[#f7f7f7]">
@@ -529,10 +529,10 @@ const goPrev = () => {
                   nextEl: '.custom-swiper-button-next'
                 }}
               >
-                {imageUrls.map((url, index) => (
+                {data?.images_paths.map((url, index) => (
                   <SwiperSlide key={index}>
                     <img
-                      src={url}
+                      src={`${storageLink}/${url}`}
                       alt={`slide ${index + 1}`}
                       className="w-full h-[250px] lg:h-[550px] object-cover"
                     />
@@ -557,7 +557,7 @@ const goPrev = () => {
           <div className="content-div relative z-20 mt-2 lg:mt-[-150px] flex flex-wrap justify-between items-start">
             <div className="left-content w-full  lg:w-1/2 mb-4 lg:mb-0">
               <div>
-                <h2 className="text-2xl sm:text-3xl text-black lg:text-white mb-2 font-semibold">{slug.replace(/-/g, ' ')}</h2>
+              <h2 className="text-2xl sm:text-3xl text-black lg:text-white mb-2 font-semibold"> {data?.name} </h2>
                 <p className="font-[400] text-base text-black sm:text-lg lg:text-white">Los Angeles City, CA, USA</p>
               </div>
               <div className="flex mt-4 text-black  lg:text-white text-base sm:text-lg">
@@ -577,8 +577,8 @@ const goPrev = () => {
                 ))}
               </div>
               <div className="flex flex-col px-4 items-start lg:items-end  lg:mt-0 lg:ml-4">
-                <span className="price text-black  lg:text-white font-semibold text-2xl sm:text-3xl my-2"> ₹ 1,90,000</span>
-                <p className="text-black  lg:text-white text-base sm:text-lg"> ₹ 5000/sq ft</p>
+                <span className="price text-black  lg:text-white font-semibold text-2xl sm:text-3xl my-2"> ₹ {data?.price}</span>
+                <p className="text-black  lg:text-white text-base sm:text-lg"> ₹ {data?.rate_per_square_feet}/sq ft</p>
               </div>
             </div>
           </div>
@@ -589,13 +589,13 @@ const goPrev = () => {
            <div className="w-full bg-white shadow-lg mb-8 p-6 sm:mb-10 sm:p-10 rounded-xl">
       <h3 className="text-lg sm:text-xl font-semibold my-2">Overview</h3>
       <div className="flex flex-wrap">
-      {imageUrls.map((url, index) => (
+      {data?.images_paths.map((url, index) => (
           <div key={index} className="w-1/2 lg:w-1/3 mb-6 sm:mb-8 flex items-start">
             <div
               className="flex border-2 hover:border-black mx-2 items-center px-3 py-3 rounded-md cursor-pointer"
               onClick={() => openModal(index)}
             >
-              <img src={url} alt={`thumbnail ${index + 1}`} className="w-full h-40 object-cover" />
+              <img src={`${storageLink}/${url}`} alt={`thumbnail ${index + 1}`} className="w-full h-40 object-cover" />
             </div>
           </div>
         ))}
@@ -686,7 +686,7 @@ const goPrev = () => {
               </div>
             </div>
 
-            <div className="flex-none w-full lg:w-1/3 h-auto p-4 right-container sticky top-0">
+            <div className="flex-none w-full lg:w-1/3  p-4 right-container h-[100%] sticky top-[85px]">
               <div className="bg-white shadow-lg p-6 rounded-xl mb-[30px]">
                 <ContactForm />
               </div>
@@ -782,9 +782,3 @@ const goPrev = () => {
 }
 
 
-export async function generateStaticParams() {
- 
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
-}

@@ -42,15 +42,15 @@ export default function Footer() {
                 <li>Apartment for Rent</li>
               </ul>
             </div>
-            <div className='mb-8 sm:mb-4  max-sm:w-[40%] '>
+             <div className='mb-8 sm:mb-4  max-sm:w-[40%] '>
               <h6 className='mb-[25px] text-white font-semibold text-[15px]'>
                 Quick Links
               </h6>
               <ul className='text-[#bebdbd] flex flex-col gap-5 text-lg'>
-                <li>Terms of Use</li>
-                <li>Privacy Policy</li>
-                <li>Our Services</li>
-                <li>Contact Support</li>
+                <li><Link href='/terms-and-condition'>Terms of Use</Link></li>
+                <li> <Link href='/privacy-policy'>Privacy Policy</Link></li>
+                <li> <Link href='/about'>Our Services</Link></li>
+                <li> <Link href='/contact'>Contact Support</Link></li>
               </ul>
             </div>
             <div className='mb-8 sm:mb-4  max-sm:w-[40%]'>

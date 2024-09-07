@@ -1,6 +1,11 @@
-import React from 'react'
-import Blogcard from './Blogcard'
+'use client'
 
+import React,{useState,useEffect} from 'react'
+import Blogcard from './Blogcard'
+import axios from 'axios'
+import { apiLink } from '../constants'
+import {useSelector,useDispatch } from "react-redux"
+import { getblog } from './store/slices/blogSlice'
 
 
 const BlogData = [
@@ -40,7 +45,32 @@ const BlogData = [
     }
 ]
 
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
 export default function Blog() {
+  const dispatch=useDispatch()
+  const state=useSelector(state=>state.blog)
+  const [blogData,setblogData] = useState()
+
+useEffect(()=>{dispatch(getblog())},[])
+useEffect(()=>{setblogData(state.data)},[state])
+
+  // useEffect(()=>{
+
+  //   const fetechData = async ()=>{
+
+  //     const res = await axios.get(`${apiLink}/blog`)
+
+  //     console.log(res.data)
+  //     setblogData(res.data)
+
+
+  //   }
+  //   fetechData()
+
+  // },[])
+
+
   return (
    <>
    <div className='w-full px-[1rem] lg:px-[5rem] py-10 '>
@@ -52,11 +82,15 @@ export default function Blog() {
         Aliquam lacinia diam quis lacus euismod
         </p>
       </div>
-     <div className='w-full flex justify-center lg:justify-between  flex-wrap '>
+     <div className='w-full  justify-center lg:justify-between  grid lg:grid-cols-3 gap-3'>
        {
-        BlogData.map((data,index)=>{
+        blogData?.map((data,index)=>{
+          const dateObj = new Date(data.date);
+    const month = monthNames[dateObj.getMonth()];
+    const day = dateObj.getDate();
+
             return (<>
-            <Blogcard id={data.index} month={data.month}  area={data.area} title={data.title} img={data.imgsrc} date={data.date}  />
+            <Blogcard id={data.id}    month={month}    area={data.subheading} title={data.title} img={data.image}  date={day}   />
             </>)
         })
 

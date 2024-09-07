@@ -12,9 +12,9 @@ import { IoHeart } from "react-icons/io5";
 import { MdOutlineBed } from "react-icons/md";
 import { TbBath } from "react-icons/tb";
 import { IoIosExpand } from "react-icons/io";
+import { apiLink,storageLink } from '../constants';
 
-
-
+import axios from 'axios';
 
 import { RxCross2 } from "react-icons/rx";
 
@@ -25,6 +25,7 @@ import {
   RangeSliderThumb,
   ChakraProvider,
   Box,
+  Spinner,
 } from '@chakra-ui/react';
 import { MdGraphicEq } from 'react-icons/md';
 
@@ -138,154 +139,51 @@ const CustomPriceRangeFilter = ({ selectedRange, onApply }) => {
   
 
 const CustomDropdown = ({ options, selectedOption, onOptionSelect,label }) => {
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const handleOptionClick = (option) => {
-      onOptionSelect(option);
-      setIsOpen(false);
-    };
-  
-    return (
-      <div className="relative inline-block mx-2 ">
-           
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-[150px]  my-[10px] bg-white border border-gray-300 rounded-[2rem]  px-4 py-2 text-left flex justify-between items-center"
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOptionClick = (option) => {
+    onOptionSelect(option);
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="relative inline-block mx-2">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-[150px] my-[10px] bg-white border border-gray-300 rounded-[2rem]  px-4 py-2 text-left flex justify-between items-center"
+      >
+        <span className='font-semibold'>{selectedOption}</span>
+        <svg
+          className={`w-5 h-5 transform transition-transform ml-4 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
-          <span className='font-semibold'>{selectedOption}</span>
-          <svg
-            className={`w-5 h-5 transform transition-transform ml-4 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-        {isOpen && (
-          <ul className="absolute p-2 z-10 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-2">
-             <label className="block text-md font-bold text-gray-700"> {label}</label>
-            {options.map((option) => (
-              <li
-                key={option}
-                onClick={() => handleOptionClick(option)}
-                className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-              >
-                {option}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    );
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+      {isOpen && (
+        <ul className="absolute p-2 z-20 w-full bg-white border border-gray-300 rounded-lg shadow-lg mt-2">
+          <label className="block text-md font-bold text-gray-700">{label}</label>
+          {options.map((option) => (
+            <li
+              key={option}
+              onClick={() => handleOptionClick(option)}
+              className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+            >
+              {option}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+
   };
 
 
-  const cardData1  = [
-    {
-        id: 0,
-        img: '/images/g1-2.webp',
-        head: 'Equestrian Family Home',
-        add: 'San Diego City, CA, USA',
-        bed: 2,
-        bath: 2,
-        space: 1000,
-        price: 100000,
-        cate: 'Villa',
-        flag:"Trending"
-    },
-    {
-        id: 1,
-        img: '/images/g1-3.webp',
-        head: 'Modern Apartment',
-        add: 'New York, NY, USA',
-        bed: 3,
-        bath: 2,
-        space: 1200,
-        price: 150000,
-        cate: 'House',
-      
-    },
-    {
-        id: 2,
-        img: '/images/g1-4.webp',
-        head: 'Cozy Cottage',
-        add: 'Austin, TX, USA',
-        bed: 1,
-        bath: 1,
-        space: 800,
-        price: 85000,
-        cate: 'Villa',
-       
-        flag:"New"
-    },
-    {
-        id: 3,
-        img: '/images/g1-2.webp',
-        head: 'Luxury Villa',
-        add: 'Miami, FL, USA',
-        bed: 5,
-        bath: 4,
-        space: 2500,
-        price: 500000,
-        cate: 'House',
-        flag:"Trending"
-     
-    },
-    {
-  
-        id: 4,
-        img: '/images/g1-3.webp',
-        head: 'Beachside Bungalow',
-        add: 'Malibu, CA, USA',
-        bed: 3,
-        bath: 2,
-        space: 1500,
-        price: 300000,
-        cate: 'Apartment',
-        flag:"New"
-    },
-    {
-        id: 5,
-        img: '/images/g1-4.webp',
-        head: 'Urban Loft',
-        add: 'Chicago, IL, USA',
-        bed: 2,
-        bath: 1,
-        space: 1100,
-        price: 175000,
-        cate: 'House',
-        flag:"New"
-    },
-    {
-        id: 2,
-        img: '/images/g1-4.webp',
-        head: 'Cozy Cottage',
-        add: 'Austin, TX, USA',
-        bed: 1,
-        bath: 1,
-        space: 800,
-        price: 85000,
-        cate: 'Villa',
-  
-       
-    },
-    {
-        id: 3,
-        img: '/images/g1-2.webp',
-        head: 'Luxury Villa',
-        add: 'Miami, FL, USA',
-        bed: 5,
-        bath: 4,
-        space: 2500,
-        price: 500000,
-        cate: 'House',
-        
-    },
-   
-   
-  ];
+ 
 
 const cardData  = [
     {
@@ -410,7 +308,7 @@ const Cards = ({img,head,add,bed, bath,space,price,cate,flag })=>{
      <div className='img-box overflow-hidden relative'>
        <Image
          className='w-full h-[220px] transition-transform duration-500 ease-in-out transform hover:scale-110'
-         src={img}
+         src={`${storageLink}/${img}`}
          width={200}
          height={200}
        />
@@ -480,156 +378,210 @@ const Cards = ({img,head,add,bed, bath,space,price,cate,flag })=>{
     </>)
 }
 
-export default function page() {
-    const [filteredData, setFilteredData] = useState(cardData);
-    const [filter, setFilter] = useState({ category: 'All', type: 'All', priceRange: [0, 300000] });
-    const [isPopupOpen, setIsPopupOpen] = useState(false);
-  
-    const handleCategoryChange = (option) => {
-      setFilter({ ...filter, category: option });
-    };
-  
-    const handleTypeChange = (option) => {
-      setFilter({ ...filter, type: option });
-    };
-  
-    const handlePriceRangeChange = (priceRange) => {
-      setFilter({ ...filter, priceRange });
-    };
-  
-    const handleApplyFilters = (priceRange) => {
-      setFilter({ ...filter, priceRange });
-      setIsPopupOpen(false);
-    };
-    const handlePriceRangeApply = (priceRange) => {
-        setFilter({ ...filter, priceRange });
-      };
-    
-  
-    useEffect(() => {
-      let data = cardData;
-  
-      if (filter.category !== 'All') {
-        data = data.filter((item) => item.cate === filter.category);
+export default function Page() {
+  const [selectedRange, setSelectedRange] = useState([0, 300000]);
+  const [selectedType, setSelectedType] = useState('All Type');
+  const [selectedBathrooms, setSelectedBathrooms] = useState('All Bathrooms');
+  const [selectedBedrooms, setSelectedBedrooms] = useState('All Bedrooms');
+  const [selectedSort, setSelectedSort] = useState('Sort by');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [fetchedData, setFetchedData] = useState([]);
+
+  const [filteredData, setFilteredData] = useState([]);
+  const [filter, setFilter] = useState({ category: 'All', type: 'All', priceRange: [0, 300000] });
+
+  const handleCategoryChange = (option) => {
+    setFilter({ ...filter, category: option });
+  };
+
+  const handleTypeChange = (option) => {
+    console.log(option)
+    setSelectedType(option);
+  };
+
+  const handlePriceRangeChange = (priceRange) => {
+    setFilter({ ...filter, priceRange });
+  };
+
+  const handlePriceRangeApply = (priceRange) => {
+    setFilter({ ...filter, priceRange });
+  };
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      setIsLoading(true);
+      try {
+        const response = await axios.get(`${apiLink}/property?page=${currentPage}&perPage=6`, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          params: {
+            priceRange: selectedRange,
+            type: selectedType === 'All' ? undefined : selectedType,
+            bedrooms: selectedBedrooms === 'All Bedrooms' ? undefined : selectedBedrooms.replace('+', ''),
+            bathrooms: selectedBathrooms === 'All Bathrooms' ? undefined : selectedBathrooms.replace('+', ''),
+            sort: selectedSort === 'Sort by' ? undefined : selectedSort,
+          }
+        });
+        setFetchedData(response.data.data);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      } finally {
+        setIsLoading(false);
       }
-  
-      if (filter.type !== 'All') {
-        data = data.filter((item) => item.type === filter.type);
-      }
-  
-      data = data.filter((item) => item.price >= filter.priceRange[0] && item.price <= filter.priceRange[1]);
-  
-      setFilteredData(data);
-    }, [filter]);
-  
+    };
+
+    fetchProperties();
+  }, [selectedRange, selectedType, selectedBathrooms, selectedBedrooms, selectedSort, currentPage]);
+
+  useEffect(() => {
+    let data = fetchedData;
+
+    if (filter.category !== 'All') {
+      data = data.filter((item) => item.cate === filter.category);
+    }
+
+    if (filter.type !== 'All') {
+      data = data.filter((item) => item.type === filter.type);
+    }
+
+    data = data.filter((item) => item.price >= filter.priceRange[0] && item.price <= filter.priceRange[1]);
+
+    setFilteredData(data);
+  }, [filter, fetchedData]);
+
+  const handlePageChange = (page) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
 
   return (
     <>
-     <div className='w-full '>
-
-      <div className='w-full h-auto relative'>
-
-        <Image 
-        width={100}
-        height={100}
-        className='w-full h-[300px] object-cover relative after:content-[] after:absolute after:w-full after:h-[300px] after:bg-black '
-        src="/images/bgimgs.jpg"
-         />
-         <div className="absolute inset-0 bg-black opacity-50"></div>
-
-         <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '>
-          <h2 className='text-white text-4xl text-center my-2 font-[500] '>
-          DISCOVER OUR PROPERTIES
-          </h2>
-          <p className='text-white text-xl text-center font-normal '>
-          Each place is a good choice our wonderful properties.
-          </p>
-
-          <p className='text-white text-xl text-center font-normal my-2'>
-            Home / For Rent
-        </p>
-
-         </div>
-       
-      </div> 
-       
-       <div className='w-full lg:px-20 py-8 bg-[#f7f7f7]'>
-       
-
-
-        <div className="flex justify-between flex-col lg:flex-row gap-5 mb-5 px-7">
-            <div>
-            <CustomDropdown
-          options={['All', 'For Sale', 'For Rent', 'Buy']}
-          selectedOption={filter.category}
-          onOptionSelect={handleCategoryChange}
-          label={"Listing Status"}
-       
-        />
-        <CustomDropdown
-          options={['All', 'House', 'Office', 'Apartment', 'Villa']}
-          selectedOption={filter.type}
-          onOptionSelect={handleTypeChange}
-          label={"Property Type"}
-        />
-         <CustomPriceRangeFilter
-          selectedRange={filter.priceRange}
-          onApply={handlePriceRangeApply}
-        />
-
-            </div>
-
-
-
-        <div className='flex items-center  gap-2'>
-           <span className='text-lg text-[#717171]'>
-           Sort By
-           </span>
-            <select className='bg-transparent pt-[0.375rem] pr-[2.25rem] pb-[0.375rem] pl-[0.75rem] font-medium text-[#212529] text-[15px]  '>
-                {['newest', 'oldest', 'best Seller', 'price lower', 'price upper'].map((value)=>{
-                     const capitalizedValue = value.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-                    return(
-                        <option value={value}>{capitalizedValue}</option>
-                    )
-                })}
-            </select>
-       
+      <div className='w-full'>
+        <div className='w-full h-auto relative'>
+          <Image
+            width={100}
+            height={100}
+            className='w-full h-[300px] object-cover relative after:content-[] after:absolute after:w-full after:h-[300px] after:bg-black '
+            src='/images/bgimgs.jpg'
+          />
+          <div className='absolute inset-0 bg-black opacity-50'></div>
+          <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '>
+            <h2 className='text-white text-4xl text-center my-2 font-[500] '>
+              DISCOVER OUR PROPERTIES
+            </h2>
+            <p className='text-white text-xl text-center font-normal '>
+              Each place is a good choice our wonderful properties.
+            </p>
+            <p className='text-white text-xl text-center font-normal my-2'>
+              Home / For Rent
+            </p>
+          </div>
         </div>
-
-
-      </div>
-
-
-      <div className="cards-container w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4  lg:gap-4   mt-4 lg:mt-4 relative">
 
         
 
-              {
-                filteredData.map((item) => (
+        <div className='w-full px-5 lg:px-20 py-8 bg-[#f7f7f7]'>
+          <div className='flex justify-between flex-col lg:flex-row gap-5 mb-5 px-7'>
+            <div>
+              {/* <CustomDropdown
+                options={['All', 'Sale', 'Rent', 'Buy']}
+                selectedOption={filter.type}
+                onOptionSelect={handleTypeChange}
+                label={'Listing Status'}
+              /> */}
+              <CustomDropdown
+              options={['All', 'Sale', 'Rent', 'Buy','Pg','Plots']}
+                selectedOption={selectedType}
+                onOptionSelect={handleTypeChange}
+                label='Type'
+              />
+              <CustomPriceRangeFilter
+                selectedRange={filter.priceRange}
+                onApply={handlePriceRangeApply}
+              />
+            </div>
+
+            <div className='flex items-center gap-2'>
+              <span className='text-lg text-[#717171]'>
+                Sort By
+              </span>
+              <select
+                className='bg-transparent pt-[0.375rem] pr-[2.25rem] pb-[0.375rem] pl-[0.75rem] font-medium text-[#212529] text-[15px]'
+                onChange={(e) => setSelectedSort(e.target.value)}
+              >
+                {['newest', 'oldest', 'best Seller', 'price lower', 'price upper'].map((value) => {
+                  const capitalizedValue = value.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+                  return (
+                    <option value={value} key={value}>{capitalizedValue}</option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+
+          <div className='flex justify-center '>
+            {isLoading ? (
+              
+              <div className="custom-spinner"></div>
+            
+            ) : (
+              <>
+
+              <div className='cards-container w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-4 mt-4 lg:mt-4 relative' > 
+              {filteredData.map((property) => (
                   <Cards
-                  img={item.img}
-                  head={item.head}
-                  add={item.add}
-                  bed={item.bed}
-                  bath={item.bath}
-                  space={item.space}
-                  price={item.price}
-                  cate={item.cate}
-                  flag={item.flag}
+                    key={property.id}
+                    img={property.images_paths[0]}
+                    head={property.title}
+                    add={property.address}
+                    bed={property.bedrooms}
+                    bath={property.bathrooms}
+                    space={property.rate_per_square_feet}
+                    price={property.price}
+                    cate={property.type}
+                    flag={property.type ? 'Featured' : ''}
                   />
-                ))
-              }
+                ))}
+              </div>
+              
+               
+
+
+              </>
+            )}
+          </div>
+
+          <div className='flex justify-center mt-4'>
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              className={`mx-2 px-4 py-2 border rounded-md ${currentPage === 1 ? 'bg-gray-300' : 'bg-white hover:bg-gray-100'}`}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            {[...Array(totalPages)].map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handlePageChange(index + 1)}
+                className={`mx-2 px-4 py-2 border rounded-md ${index + 1 === currentPage ? 'bg-black text-white' : 'bg-white hover:bg-gray-100'}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              className={`mx-2 px-4 py-2 border rounded-md ${currentPage === totalPages ? 'bg-gray-300' : 'bg-white hover:bg-gray-100'}`}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </div>
-       </div>
-
- 
-
-
- 
-       
- 
-     </div>
+      </div>
     </>
-
-  )
+  );
 }

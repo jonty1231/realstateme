@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -7,44 +7,22 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper/modules';
 import Image from 'next/image';
 
+import { storageLink } from '../constants';
+import {useDispatch,useSelector} from "react-redux"
+import { gettrendingproperty } from './store/slices/trandingSlice';
 const Bglessslider = () => {
-  const sliderData = [
-    {
-      id: 1,
-      imgSrc: '/images/bg_farm_1.webp',
-      heading: '1RK Studio Apartment',
-      subhead: "3 BHK Independent Floor | Land in Mullanpur, Chandigarh",
-      price: "32 Lac to 4 Cr"
-    },
-    {
-      id: 2,
-      imgSrc: '/images/bg_socity_1.webp',
-      heading: 'Independant Builder',
-      subhead: "5 BHK Independent Floor | Land in Punchkula, Haryana",
-      price: "15 Lac to 4 Cr"
-    },
-    {
-      id: 3,
-      imgSrc: '/images/build_room_2.webp',
-      heading: 'Farm House',
-      subhead: "7 BHK Independent Floor | Land in Ambala, Haryana",
-      price: "20 Lac to 1.5 Cr"
-    },
-    {
-      id: 4,
-      imgSrc: '/images/room_3.webp',
-      heading: 'Serviced Apartment',
-      subhead: "10 BHK Independent Floor | Land in Ludhiana, Punjab",
-      price: "25 Lac to 7 Cr"
-    },
-    {
-      id: 5,
-      imgSrc: '/images/bg_socity_1.webp',
-      heading: 'Serviced Apartment',
-      subhead: "10 BHK Independent Floor | Land in Ludhiana, Punjab",
-      price: "25 Lac to 7 Cr"
-    },
-  ];
+  const dispatch=useDispatch()
+  const state=useSelector((state)=>state.trendingproperty)
+
+const [newBglessCardData,setBglessCardData] = useState()
+ useEffect(()=>{
+  dispatch(gettrendingproperty())
+ },[])
+
+
+useEffect(()=>{
+  setBglessCardData(state.data)
+},[state])
 
   const bgColors = [
     'bg-blue-100',
@@ -79,18 +57,19 @@ const Bglessslider = () => {
           }}
           className="swiper-container"
         >
-          {sliderData.map((slider) => (
+          { newBglessCardData?.map((slider) => (
             <SwiperSlide key={slider.id}>
+           
               <div className="mx-2 my-2">
                 <div className={`w-[280px] h-[300px] rounded-md relative mx-4 transition-transform duration-300 ease-in-out hover:shadow-xl overflow-hidden ${getRandomBgColor()}`}>
                   <div className="content px-12 py-8 z-10">
                     <h2 className="text-2xl text-start font-bold text-[#42526E]">
-                      {slider.heading}
+                      {slider.title}
                     </h2>
-                    <p className="text-sm text-[#8993A4] text-start mb-4">1,100+ Properties</p>
+                    <p className="text-sm text-[#8993A4] text-start mb-4">{slider.propertyvalue}+ Properties</p>
                   </div>
                   <div className="img absolute bottom-0 left-0 right-0 rounded-md transition-transform duration-300 ease-in-out hover:scale-110">
-                    <img src={slider.imgSrc} width={200} height={200} className="w-full h-auto rounded-md" alt={slider.heading} />
+                    <img src={`${storageLink}/${slider.images_paths}`} width={200} height={200} className="w-full h-auto rounded-md" alt={slider.heading} />
                   </div>
                 </div>
               </div>
