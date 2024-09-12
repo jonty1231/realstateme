@@ -216,7 +216,7 @@ const Loginhandel=async(e)=>{
 const [togglecontect,settogglecontect]=useState("")
   return (
     <>
-      <div className="flex sticky top-0 z-50 px-8 py-2 lg:px-14 lg:py-4 bg-white shadow-md items-center justify-between">
+      <div className="flex sticky top-0 z-50 md:px-8 py-2 lg:px-14 lg:py-4 bg-white shadow-md items-center justify-between ">
 
       <div id="recaptcha"></div>
         <div className='block lg:hidden'>

@@ -524,7 +524,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
 {singledata && singledata.property_description_1}
                                         </p>
                                         <div className={`overflow-hidden transition-all duration-500 ease-in-out ${showMore ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                            <p className="text-[#181a20] text-lg font-normal mb-4 ">
+                                            <p className="text-[#181a20] text-lg font-normal mb-4 text-justify ">
                                             {singledata && singledata.property_description_2}
                                             </p>
                                         </div>
