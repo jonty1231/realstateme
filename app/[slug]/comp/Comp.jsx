@@ -365,10 +365,10 @@ useEffect(()=>{setsingledata(state.data)},[state])
                             <div className='absolute  w-full  top-[50%]   z-10 '>
                                 <div className='flex  justify-evenly relative'>
 
-                                    <div className='rightArrow absolute left-0 w-10 h-10 flex items-center cursor-pointer  justify-center border rounded-full   hover:text-black text-white border-white text-2xl'>
+                                    <div className='rightArrow absolute left-[1%] w-10 h-10 flex items-center cursor-pointer  justify-center border rounded-full   hover:text-black text-white border-white text-2xl'>
                                         <IoIosArrowBack />
                                     </div>
-                                    <div className='leftArrow absolute left-[90%] w-10 h-10 flex items-center justify-center border rounded-full cursor-pointer   hover:text-black text-white border-white text-2xl'>
+                                    <div className='leftArrow absolute right-[1%] w-10 h-10 flex items-center justify-center border rounded-full cursor-pointer   hover:text-black text-white border-white text-2xl'>
                                         <IoIosArrowForward />
                                     </div>
 
@@ -412,7 +412,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
                            
                                 return(
                                     <SwiperSlide onClick={() => handleSlideClick(index)}>
-                                    <Image className='w-full h-[90px] lg:h-[150px] rounded-2xl' width={200} height={200} src={`${storageLink}/${info}`} alt='Slide 1' />
+                                    <Image className='w-full h-[60px] lg:h-[150px] rounded-2xl' width={200} height={200} src={`${storageLink}/${info}`} alt='Slide 1' />
                                 </SwiperSlide>)
                             })}
                                
