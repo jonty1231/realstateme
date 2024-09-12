@@ -84,7 +84,7 @@ body{
 }
 .btn:hover{
   color: white;
-  border: transparent;
+   overflow: hidden;
 }
 .btn::before{
   content: "";
