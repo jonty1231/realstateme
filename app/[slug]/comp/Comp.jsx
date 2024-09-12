@@ -180,14 +180,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
 
 
 
-    const goNext = () => {
-
-        if (swiper) swiper.slideNext();
-    };
-
-    const goPrev = () => {
-        if (swiper) swiper.slidePrev();
-    };
+    
 
     const [showMore, setShowMore] = useState(false);
 
@@ -250,27 +243,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
         },
     ];
 
-    const imgItems = [
-        {
-            img: 'https://images.unsplash.com/photo-1594818898109-44704fb548f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80"',
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1594818896795-35ad7bcf3c6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1594818896744-57eca4d47b07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80',
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80',
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1649859394614-dc4f7290b7f2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        },
-        {
-            img: 'https://images.unsplash.com/photo-1658909914248-15157163c878?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80',
-        },
-    ];
-
+ 
 
     const propertyData = [
         {
@@ -311,91 +284,24 @@ useEffect(()=>{setsingledata(state.data)},[state])
             img: 'https://randomuser.me/api/portraits/men/1.jpg',
         }
     ];
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-    };
+    // const settings = {
+    //     dots: true,
+    //     infinite: true,
+    //     speed: 500,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     autoplay: true,
+    //     autoplaySpeed: 3000,
+    // };
 
 
 
     const address = "1600 Amphitheatre Parkway, Mountain View, CA";
-    const Features = [
-        {
-            id: 0,
-            Name: "Air Conditioning",
 
-        },
-        {
-            id: 1,
-            Name: "Lawn",
-
-        },
-        {
-            id: 2,
-            Name: "Dryer",
-
-        },
-        {
-            id: 3,
-            Name: "Microwave",
-
-        },
-        {
-            id: 4,
-            Name: "Outdoor Shower",
-
-        },
-        {
-            id: 5,
-            Name: "Refrigerator",
-
-        },
-        {
-            id: 6,
-            Name: "TV Cable",
-
-        },
-        {
-            id: 7,
-            Name: "Washer",
-
-        },
-
-        {
-            id: 8,
-            Name: "WiFi6",
-
-        },
-
-    ]
-    const imageUrls = [
-        "https://homez-appdir.vercel.app/_next/image?url=%2Fimages%2Flistings%2Flisting-single-slide4.jpg&w=3840&q=75",
-        "https://homez-appdir.vercel.app/_next/image?url=%2Fimages%2Flistings%2Flisting-single-slide4.jpg&w=3840&q=75",
-        "https://homez-appdir.vercel.app/_next/image?url=%2Fimages%2Flistings%2Flisting-single-slide4.jpg&w=3840&q=75",
-    ];
-
-    const [selectedImage, setSelectedImage] = useState(null);
+  
 
 
-
-    const closeModal = () => {
-        setSelectedImage(null);
-    };
-
-
-    const [lightboxToggler, setLightboxToggler] = useState(false);
-    const [lightboxIndex, setLightboxIndex] = useState(0);
-
-    const openModal = (index) => {
-        setLightboxIndex(index);
-        setLightboxToggler(!lightboxToggler);
-    };
-
+   
 
 
     useEffect(() => {
@@ -413,20 +319,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
             topSwiperRef.current.swiper.slideTo(index);
         }
     };
-    const handleNextSlide = () => {
-        if (topSwiperRef.current) {
-          topSwiperRef.current.swiper.slideNext();
-        }
-      };
-    
-      // Handle previous slide for top slider
-      const handlePrevSlide = () => {
-        if (topSwiperRef.current) {
-          topSwiperRef.current.swiper.slidePrev();
-        }
-      };
-    
-      // Handle next slide for bottom slider
+   
       const handleNextSlideBottom = () => {
         if (bottomSwiperRef.current) {
           bottomSwiperRef.current.swiper.slideNext();
@@ -443,7 +336,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
 
     return (
         <>
-            <div className="w-full ">
+            <div className="w-full  scroller">
 
                 <div className='w-full h-auto shadow-lg rounded-md p-4 bg-white '>
                     <div className='w-full relative'>
@@ -464,15 +357,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
                             })}
                           
                          
-                            {/* <SwiperSlide>
-                                <Image className='w-full h-[300px] lg:h-[600px] rounded-2xl object-cover' width={100} height={200} src='/images/slidernew-3.webp' alt='Slide 3' />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Image className='w-full h-[300px] lg:h-[600px] rounded-2xl object-cover' width={100} height={200} src='/images/slidernew-4.webp' alt='Slide 3' />
-                            </SwiperSlide>
-                            <SwiperSlide>
-                                <Image className='w-full h-[300px] lg:h-[600px] rounded-2xl object-cover' width={100} height={200} src='/images/slidernew-5.webp' alt='Slide 3' />
-                            </SwiperSlide> */}
+                          
                         </Swiper>
 
 
@@ -558,21 +443,24 @@ useEffect(()=>{setsingledata(state.data)},[state])
                 {/* END Slider Div */}
 
                 {/* Start Content Div */}
-                <div className="mx-auto w-[90%] mt-8 ">
+                <div className="mx-auto w-[90%]  ">
 
 
 
 
 
                     <section className="w-full h-auto py-5 flex flex-col lg:flex-row items-center">
-                        <div className="content-div w-full px-5 flex flex-col lg:flex-row justify-between items-center">
+                        <div className="content-div w-full md:px-5 flex flex-col lg:flex-row justify-between items-center">
                             <div className="left-content w-full lg:w-1/2">
+                            <div className=' flex justify-between items-center'>
                                 <h2 className="text-[32px] lg:text-[64px] font-semibold my-2">
                                     {singledata && singledata.name}
-                                </h2>
-                                <div className='flex items-center flex-wrap'>
-                                    <span className="px-2 py-1 bg-black text-white text-sm rounded-xl">FOR SALE</span>
-                                    <p className="text-md flex items-center ml-4 flex-wrap">
+                                </h2>   <span className="px-2 py-1 bg-black text-white text-sm rounded-xl h-fit block lg:hidden">FOR SALE</span>
+                                </div>
+
+                                <div className='flex  items-center flex-wrap'>
+                                <span className="px-2 hidden lg:block py-1 bg-black text-white text-sm rounded-xl h-fit">FOR SALE</span>
+                                    <p className="text-md flex items-center lg:ml-4 text-center flex-wrap">
                                         <span className='mr-1'>
                                             <CiLocationOn />
                                         </span>
@@ -580,32 +468,37 @@ useEffect(()=>{setsingledata(state.data)},[state])
                                     </p>
                                 </div>
                             </div>
-                            <div className="right-content w-full lg:w-1/2 flex flex-col justify-end items-center lg:items-end">
-                                <h2 className="text-[28px] lg:text-[55px] font-semibold my-2">
+                            <div className="  right-content w-full my-3 md:my-0 lg:w-1/2 flex flex-col-reverse gap-2 md:gap-0 md:flex-col md:justify-end  lg:items-end">
+                               
+                                <div className='flex flex-col md:items-end gap-0' >
+                                <h2 className="text-[28px] lg:text-[55px] font-semibold md:my-2">
                                     Price: ₹{singledata && singledata.price}
                                 </h2>
 
-                                <span className="text-[16px] lg:text-[28px] my-4 text-[#00000080] rounded-xl">
+                                <span className="text-[16px] lg:text-[28px] md:my-4 text-[#00000080] rounded-xl">
                                     Est. Payment <b className='font-bold text-black'>₹8,343/mo*</b>
                                 </span>
-                                <div className="flex mb-2 lg:mb-0 justify-center lg:justify-end flex-wrap">
+                                </div>
+                                <div>
+                                <div className="flex  lg:mb-0 md:justify-center  lg:justify-end flex-wrap">
                                     {dataIcons.map((dataIcon) => (
                                         <div key={dataIcon.id} className="flex border-2 text-black hover:border-black mx-2 items-center px-2 py-2 rounded-md">
                                             <dataIcon.icon className="text-lg sm:text-xl lg:text-2xl" />
                                         </div>
                                     ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </section>
 
 
-                    <div className="w-full flex flex-wrap py-2  mt-2 lg:mt-4 ">
+                    <div className="w-full flex flex-wrap lg:py-2 lg:mt-4 ">
                         <div className="flex-none w-full lg:w-2/3   p-4 left-container min-h-screen ">
 
 
 
-                            <div className="w-full bg-white shadow-lg mb-8 p-6 sm:mb-10 sm:p-10 rounded-xl">
+                            <div className="w-full bg-white shadow-lg mb-8 p-3 md:p-6 sm:mb-10 sm:p-10 rounded-xl">
                                 <h3 className="text-lg sm:text-xl font-semibold my-2">Overview</h3>
                                 <div className="flex flex-wrap">
                                     {Overvirw.map((overview) => (
@@ -623,15 +516,15 @@ useEffect(()=>{setsingledata(state.data)},[state])
                             </div>
 
 
-                            <div className="w-full bg-white shadow-lg my-2 mb-[30px] p-[30px] rounded-xl">
+                            <div className="w-full bg-white shadow-lg my-2 mb-[30px] p-4 md:p-[30px] rounded-xl">
                                 <h3 className="text-xl font-semibold">Property Description</h3>
                                 <div className="py-4">
                                     <div className="content-des text-[#181a20]">
-                                        <p className="text-[#181a20] text-lg font-[400] mb-4">
+                                        <p className="text-[#181a20] text-lg font-[400] mb-4 text-justify">
 {singledata && singledata.property_description_1}
                                         </p>
                                         <div className={`overflow-hidden transition-all duration-500 ease-in-out ${showMore ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                                            <p className="text-[#181a20] text-lg font-normal mb-4">
+                                            <p className="text-[#181a20] text-lg font-normal mb-4 ">
                                             {singledata && singledata.property_description_2}
                                             </p>
                                         </div>
@@ -657,7 +550,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
                                 </div>
                             </div>
 
-                            <div className="w-full bg-white shadow-lg my-2 mb-[30px] p-[30px] rounded-xl">
+                            <div className="w-full bg-white shadow-lg my-2 mb-[30px] p-4 md:p-[30px] rounded-xl">
                                 <h3 className="text-xl font-semibold">Features & Amenities</h3>
                                 <div className="py-6">
                                     <ul className="grid grid-cols-2 sm:grid-cols-2 list-disc list-inside lg:grid-cols-3 gap-4">
@@ -678,14 +571,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
                                 </div>
                             </div>
                         </div>
-{
 
-
-
-
-
-
-}
                         <div className="flex-none w-full lg:w-1/3  p-4 right-container h-[100%] sticky top-[85px]">
                             <div className="bg-white shadow-lg p-6 rounded-xl mb-[30px]">
                                 <ContactForm />

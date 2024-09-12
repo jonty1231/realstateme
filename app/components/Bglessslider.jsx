@@ -37,7 +37,9 @@ useEffect(()=>{
   };
 
   return (
+    
     <div className="px-8 lg:px-20 md:px-8 sm:px-8 mt-12 overflow-hidden">
+      
       <div className="content">
         <h2 className="text-2xl font-bold text-gray-800 text-start">Apartments, Villas and more</h2>
         <p className="text-xl font-bold text-gray-500 text-start">in Chandigarh</p>

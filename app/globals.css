@@ -94,11 +94,15 @@ body{
 top: 60%;
 left: -100%;
 transform: rotate(45deg);
-background: #EA580C;
+background: black;
 z-index: -1;
 transition: all 0.5s;
 }
 .btn:hover::before{
   top: -120%;
 left: 0%;
+}
+
+.scroller::-webkit-scrollbar{
+  width: 0px;
 }

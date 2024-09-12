@@ -37,7 +37,7 @@ export async function generateStaticParams()
 
 export default function Page({ params: { slug } }) {
     return (
-        <div>
+        <div className='scroller'>
             <SlugComponent slug={slug} />
         </div>
     );

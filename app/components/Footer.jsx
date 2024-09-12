@@ -10,7 +10,7 @@ import Link from 'next/link'
 export default function Footer() {
   return (
     <>
-      <footer className="w-full bg-cover bg-center pt-[40px]" style={{ backgroundImage: `url('/images/footer-bg.jpg')` }}>
+      <footer className="w-full overflow-x-hidden bg-cover bg-center pt-[40px]" style={{ backgroundImage: `url('/images/footer-bg.jpg')` }}>
       <div className='container mx-auto px-4 p sm:px-8 lg:px-[6.5rem]'>
 
         <div className='grid grid-cols-2 py-2 sm:grid-cols-2 border-b border-[#ffffff1a] my-[20px]'>
@@ -88,15 +88,15 @@ export default function Footer() {
 
           <div className='ml-[0%]  sm:ml-[22.66666667%] px-8 lg:ml-0'>
             <div className='relative mb-2 flex flex-wrap justify-around'>
-              <div className='flex flex-col hidden lg:block text-white mb-8'>
-                <p className='text-[#bebdbd] text-lg my-2'>
+              <div className='flex flex-col  lg:block  text-white mb-8'>
+                <p className='text-[#bebdbd] text-lg my-2  '>
                   Total Free Customer Care
                 </p>
-                <h6 className='font-semibold text-xl'>
+                <h6 className='font-semibold text-xl '>
                   +(0) 123 050 945 02
                 </h6>
               </div>
-              <div className='flex flex-col hidden lg:block text-white'>
+              <div className='flex flex-col  lg:block text-white'>
                 <p className='text-[#bebdbd] text-lg my-2'>
                   Need Live Support?
                 </p>

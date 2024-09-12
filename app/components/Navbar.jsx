@@ -15,7 +15,7 @@ import { FcCallback } from "react-icons/fc";
 import { MdOutlineHeadphones } from "react-icons/md";
 
 import Swal from 'sweetalert2'
-// import 'sweetalert2/src/sweetalert2.scss'
+
 
 
 
@@ -227,7 +227,7 @@ const [togglecontect,settogglecontect]=useState("")
 
         <div>
           <Link href='/'>
-            <Image src="/images/logos.png" className="" width={250} height={40} />
+            <Image src="/images/logos.png" className=" w-[150px] lg:w-[250px]" width={250} height={40} />
           </Link>
 
         </div>
