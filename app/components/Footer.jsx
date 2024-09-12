@@ -66,14 +66,7 @@ export default function Footer() {
             </div>
 
             <div className='mb-8 block lg:hidden max-sm:w-[50%]' >
-            <div className='flex flex-col text-white mb-8'>
-                <p className='text-[#bebdbd] text-nowrap text-lg my-2'>
-                  Total Free Customer Care
-                </p>
-                <h6 className='font-semibold text-nowrap text-xl'>
-                  +(0) 123 050 945 02
-                </h6>
-              </div>
+          
               <div className='flex flex-col text-white'>
                 <p className='text-[#bebdbd] text-lg my-2'>
                   Need Live Support?

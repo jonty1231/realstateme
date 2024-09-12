@@ -494,7 +494,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
 
 
                     <div className="w-full flex flex-wrap lg:py-2 lg:mt-4 ">
-                        <div className="flex-none w-full lg:w-2/3   p-4 left-container min-h-screen ">
+                        <div className="flex-none w-full okkkk lg:w-2/3   left-container min-h-screen ">
 
 
 
@@ -572,7 +572,7 @@ useEffect(()=>{setsingledata(state.data)},[state])
                             </div>
                         </div>
 
-                        <div className="flex-none w-full lg:w-1/3  p-4 right-container h-[100%] sticky top-[85px]">
+                        <div className="flex-none w-full lg:w-1/3  right-container h-[100%] sticky top-[85px]">
                             <div className="bg-white shadow-lg p-6 rounded-xl mb-[30px]">
                                 <ContactForm />
                             </div>
